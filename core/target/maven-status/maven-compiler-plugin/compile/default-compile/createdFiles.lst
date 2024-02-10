@@ -1,1 +1,5 @@
 com/events/processor/EventsProcessorApplication.class
+com/events/processor/dto/EventAcknowledgeMessage$EventAcknowledgeMessageBuilder.class
+com/events/processor/controller/EventController.class
+com/events/processor/dto/Alive$AliveBuilder.class
+com/events/processor/processor/EventProcessor.class

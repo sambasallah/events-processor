@@ -1,1 +1,10 @@
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/dto/EventMessage.java
 /Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/EventsProcessorApplication.java
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/handler/RabbitMQHandler.java
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/dto/Alive.java
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/processor/EventProcessor.java
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/handler/AMQHandler.java
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/dto/Event.java
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/handler/KafkaHandler.java
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/dto/EventAcknowledgeMessage.java
+/Users/sambasallah/Desktop/events-processor/core/src/main/java/com/events/processor/controller/EventController.java
