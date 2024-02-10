@@ -1,7 +1,9 @@
 package com.events.processor;
 
+import com.events.processor.amq.AmqProcessor;
 import com.events.processor.dto.EventMessage;
 import com.events.processor.kafka.KafkaProcessor;
+import com.events.processor.rabbitmq.RabbitMqProcessor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +22,10 @@ public class ProducerAdapter {
 
     @Autowired
     private KafkaProcessor kafkaProcessor;
+    @Autowired
+    private AmqProcessor amqProcessor;
+    @Autowired
+    private RabbitMqProcessor rabbitMqProcessor;
 
     public void process(EventMessage eventMessage) {
 
@@ -28,11 +34,11 @@ public class ProducerAdapter {
         }
 
         if(this.isEnableAMQ()) {
-
+            amqProcessor.process(eventMessage);
         }
 
         if(this.isEnableRabbitMQ()) {
-
+            rabbitMqProcessor.process(eventMessage);
         }
 
     }
