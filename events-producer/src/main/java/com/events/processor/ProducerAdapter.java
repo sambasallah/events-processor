@@ -7,7 +7,6 @@ import com.events.processor.rabbitmq.RabbitMqProcessor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Service;
 
 @Data

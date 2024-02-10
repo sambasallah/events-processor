@@ -21,15 +21,15 @@ public class KafkaProcessor implements ProducerProcessor {
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
-    @Value(value = "${spring.kafka.topic-name}")
-    private String orderTopicName;
+//    @Value(value="${spring.kafka.topic-name}")
+//    private String orderTopicName;
 
     @Override
     public void process(EventMessage eventMessage) {
        try {
-           CompletableFuture<SendResult<String, String>> future =  kafkaTemplate.send(orderTopicName, String.valueOf(UUID.randomUUID()), new Gson().toJson(eventMessage));
+           CompletableFuture<SendResult<String, String>> future =  kafkaTemplate.send("events-topic", String.valueOf(UUID.randomUUID()), new Gson().toJson(eventMessage));
            SendResult<String, String> result = future.get();
-           LOGGER.info("This is logging {} {} {}", result.getRecordMetadata().topic(), result.getRecordMetadata().offset(), result.getRecordMetadata().partition());
+           LOGGER.info("topic {}, offset {} , partition {}", result.getRecordMetadata().topic(), result.getRecordMetadata().offset(), result.getRecordMetadata().partition());
            LOGGER.info("KAFKA EVENT: {}", eventMessage);
        } catch (Exception e) {
            LOGGER.info("An Exception occurred : {}", e.getMessage());
