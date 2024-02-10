@@ -22,7 +22,7 @@ public class EventProcessor {
     private boolean enableKafka;
     @Value(value = "${enable.amq}")
     private boolean enableAMQ;
-    @Value(value = "${enable.rabbitMQ}")
+    @Value(value = "${enable.rabbitmq}")
     private boolean enableRabbitMQ;
 
     @Autowired
@@ -49,6 +49,7 @@ public class EventProcessor {
         EventAcknowledgeMessage eventAcknowledgeMessage = EventAcknowledgeMessage.builder().id(UUID.randomUUID())
                 .message("Acknowledged Event")
                 .build();
+
         return new ResponseEntity<>(eventAcknowledgeMessage, HttpStatus.CREATED);
     }
 }

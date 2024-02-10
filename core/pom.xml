@@ -11,6 +11,19 @@
 
     <artifactId>core</artifactId>
 
+    <dependencies>
+        <dependency>
+            <artifactId>events-producer</artifactId>
+            <groupId>com.events-processor</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <artifactId>events-consumer</artifactId>
+            <groupId>com.events-processor</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
