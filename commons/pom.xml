@@ -9,26 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>core</artifactId>
-
-    <dependencies>
-        <dependency>
-            <artifactId>events-producer</artifactId>
-            <groupId>com.events-processor</groupId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <artifactId>events-consumer</artifactId>
-            <groupId>com.events-processor</groupId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.events-processor</groupId>
-            <artifactId>commons</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+    <artifactId>commons</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

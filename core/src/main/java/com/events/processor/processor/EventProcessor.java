@@ -1,7 +1,7 @@
 package com.events.processor.processor;
 
-import com.events.processor.dto.EventAcknowledgeMessage;
-import com.events.processor.dto.EventMessage;
+import com.events.processor.event.dto.EventAcknowledgeMessage;
+import com.events.processor.event.dto.EventMessage;
 import com.events.processor.handler.AMQHandler;
 import com.events.processor.handler.KafkaHandler;
 import com.events.processor.handler.RabbitMQHandler;

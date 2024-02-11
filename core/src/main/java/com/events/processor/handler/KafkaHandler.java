@@ -1,7 +1,7 @@
 package com.events.processor.handler;
 
 import com.events.processor.ProducerAdapter;
-import com.events.processor.dto.EventMessage;
+import com.events.processor.event.dto.EventMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

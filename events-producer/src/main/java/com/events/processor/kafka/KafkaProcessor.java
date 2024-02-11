@@ -1,6 +1,6 @@
 package com.events.processor.kafka;
 
-import com.events.processor.dto.EventMessage;
+import com.events.processor.event.dto.EventMessage;
 import com.events.processor.processor.ProducerProcessor;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class KafkaProcessor implements ProducerProcessor {
@@ -21,15 +22,21 @@ public class KafkaProcessor implements ProducerProcessor {
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
-//    @Value(value="${spring.kafka.topic-name}")
-//    private String orderTopicName;
+
+//    @Value(value="${kafka.topic-name}")
+//    private String kafkaTopicName;
+//    @Value(value="${kafka.send.timeout.ms}")
+//    private int kafkaSendTimeoutMS;
 
     @Override
     public void process(EventMessage eventMessage) {
        try {
-           CompletableFuture<SendResult<String, String>> future =  kafkaTemplate.send("events-topic", String.valueOf(UUID.randomUUID()), new Gson().toJson(eventMessage));
+           CompletableFuture<SendResult<String, String>> future =  kafkaTemplate
+                   .send("events", String.valueOf(UUID.randomUUID()), new Gson().toJson(eventMessage))
+                   .orTimeout(10000, TimeUnit.MILLISECONDS);
            SendResult<String, String> result = future.get();
-           LOGGER.info("topic {}, offset {} , partition {}", result.getRecordMetadata().topic(), result.getRecordMetadata().offset(), result.getRecordMetadata().partition());
+           LOGGER.info("topic {}, offset {} , partition {}", result.getRecordMetadata().topic(),
+                   result.getRecordMetadata().offset(), result.getRecordMetadata().partition());
            LOGGER.info("KAFKA EVENT: {}", eventMessage);
        } catch (Exception e) {
            LOGGER.info("An Exception occurred : {}", e.getMessage());

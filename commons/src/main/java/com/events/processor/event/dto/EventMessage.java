@@ -1,4 +1,4 @@
-package com.events.processor.dto;
+package com.events.processor.event.dto;
 
 import java.util.UUID;
 

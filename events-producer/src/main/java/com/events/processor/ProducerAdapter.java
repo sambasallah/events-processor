@@ -1,7 +1,7 @@
 package com.events.processor;
 
 import com.events.processor.amq.AmqProcessor;
-import com.events.processor.dto.EventMessage;
+import com.events.processor.event.dto.EventMessage;
 import com.events.processor.kafka.KafkaProcessor;
 import com.events.processor.rabbitmq.RabbitMqProcessor;
 import lombok.Data;

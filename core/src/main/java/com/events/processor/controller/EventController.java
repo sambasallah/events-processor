@@ -1,8 +1,8 @@
 package com.events.processor.controller;
 
-import com.events.processor.dto.Alive;
-import com.events.processor.dto.EventAcknowledgeMessage;
-import com.events.processor.dto.EventMessage;
+import com.events.processor.event.dto.Alive;
+import com.events.processor.event.dto.EventAcknowledgeMessage;
+import com.events.processor.event.dto.EventMessage;
 import com.events.processor.processor.EventProcessor;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
