@@ -1,7 +1,7 @@
 package com.events.processor.kafka;
 
-import com.events.processor.event.dto.EventMessage;
 import com.events.processor.processor.ProducerProcessor;
+import com.events.processor.event.dto.EventMessage;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,17 +23,17 @@ public class KafkaProcessor implements ProducerProcessor {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-//    @Value(value="${kafka.topic-name}")
-//    private String kafkaTopicName;
-//    @Value(value="${kafka.send.timeout.ms}")
-//    private int kafkaSendTimeoutMS;
+    @Value(value="${events.kafka.topic-name}")
+    private String kafkaTopicName;
+    @Value(value="${events.kafka.send.timeout.ms}")
+    private int kafkaSendTimeoutMS;
 
     @Override
     public void process(EventMessage eventMessage) {
        try {
            CompletableFuture<SendResult<String, String>> future =  kafkaTemplate
-                   .send("events", String.valueOf(UUID.randomUUID()), new Gson().toJson(eventMessage))
-                   .orTimeout(10000, TimeUnit.MILLISECONDS);
+                   .send(kafkaTopicName, String.valueOf(UUID.randomUUID()), new Gson().toJson(eventMessage))
+                   .orTimeout(kafkaSendTimeoutMS, TimeUnit.MILLISECONDS);
            SendResult<String, String> result = future.get();
            LOGGER.info("topic {}, offset {} , partition {}", result.getRecordMetadata().topic(),
                    result.getRecordMetadata().offset(), result.getRecordMetadata().partition());
