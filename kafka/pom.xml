@@ -9,18 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>core</artifactId>
+    <artifactId>kafka</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.events-processor</groupId>
             <artifactId>commons</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.events-processor</groupId>
-            <artifactId>kafka</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

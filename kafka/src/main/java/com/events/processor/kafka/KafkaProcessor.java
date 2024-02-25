@@ -1,7 +1,7 @@
 package com.events.processor.kafka;
 
-import com.events.processor.processor.ProducerProcessor;
 import com.events.processor.event.dto.EventMessage;
+import com.events.processor.kafka.processor.ProducerProcessor;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +29,9 @@ public class KafkaProcessor implements ProducerProcessor {
     private int kafkaSendTimeoutMS;
 
 
+
     @Override
-    public void process(EventMessage eventMessage) {
+    public boolean process(EventMessage eventMessage) {
        try {
            CompletableFuture<SendResult<String, String>> future =  kafkaTemplate
                    .send(kafkaTopicName, String.valueOf(UUID.randomUUID()), new Gson().toJson(eventMessage))
@@ -39,9 +40,11 @@ public class KafkaProcessor implements ProducerProcessor {
            LOGGER.info("topic {}, offset {} , partition {}", result.getRecordMetadata().topic(),
                    result.getRecordMetadata().offset(), result.getRecordMetadata().partition());
            LOGGER.info("KAFKA EVENT: {}", eventMessage);
+           return true;
 
        } catch (Exception e) {
            LOGGER.info("An Exception occurred : {}", e.getMessage());
+           return false;
        }
     }
 }

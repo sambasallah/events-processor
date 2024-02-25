@@ -3,8 +3,6 @@ package com.events.processor.kafka.consumerconfig;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -21,9 +19,6 @@ import java.util.UUID;
 @Component
 public class KafkaConsumerConfig {
 
-
-    public static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumerConfig.class);
-
     @Value("${events.kafka.bootstrapServers")
     private String bootstrapServers;
 
@@ -35,7 +30,7 @@ public class KafkaConsumerConfig {
         consumerProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         consumerProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         consumerProps.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
-        consumerProps.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "10");
+        consumerProps.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "100");
         return new DefaultKafkaConsumerFactory<>(consumerProps);
     }
 
@@ -44,7 +39,7 @@ public class KafkaConsumerConfig {
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        factory.setConcurrency(3);
+        factory.setConcurrency(4);
         factory.getContainerProperties().setPollTimeout(3000);
         return factory;
     }
