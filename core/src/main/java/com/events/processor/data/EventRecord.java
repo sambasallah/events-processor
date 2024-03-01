@@ -1,12 +1,7 @@
 package com.events.processor.data;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.math.BigInteger;
-
 
 @Entity
 @Data
@@ -18,15 +13,13 @@ public class EventRecord {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private BigInteger id;
+    @Column(name = "eventID")
+    private String eventID;
     @Column(name = "eventType")
     private String eventType;
     @Column(name = "eventData")
     private String eventData;
     @Column(name = "status")
     private String status;
-    @Column(name = "eventID")
-    private String eventID;
 
 }

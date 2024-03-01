@@ -6,7 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public class RabbitMQHandler {
 
-    public void handle(EventMessage eventMessage) {
-
-    }
+    public void handle(EventMessage eventMessage) {}
 }
