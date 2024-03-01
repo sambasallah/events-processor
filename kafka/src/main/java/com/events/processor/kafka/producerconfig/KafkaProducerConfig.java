@@ -19,7 +19,6 @@ public class KafkaProducerConfig {
     @Value(value="${events.kafka.bootstrapServers}")
     private String bootstrapServers;
 
-    @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);

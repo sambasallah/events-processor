@@ -10,8 +10,6 @@ import java.math.BigInteger;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EventRecord {
 
     public enum STATUS {

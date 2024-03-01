@@ -8,10 +8,10 @@ import com.events.processor.handler.AMQHandler;
 import com.events.processor.handler.RabbitMQHandler;
 import com.events.processor.repository.EventRecordRepository;
 import com.google.gson.Gson;
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +20,10 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-@Data
+
+@Getter
 @Service
+@RequiredArgsConstructor
 public class EventProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EventProcessor.class);
@@ -35,15 +37,11 @@ public class EventProcessor {
     @Value(value = "${events.kafka.bootstrapServers}")
     private String bootstrapServers;
 
-    @Autowired
-    private AMQHandler amqHandler;
-    @Autowired
-    private KafkaHandler kafkaHandler;
-    @Autowired
-    private RabbitMQHandler  rabbitMQHandler;
 
-    @Autowired
-    private EventRecordRepository eventRecordRepository;
+    private final AMQHandler amqHandler;
+    private final KafkaHandler kafkaHandler;
+    private final RabbitMQHandler  rabbitMQHandler;
+    private final EventRecordRepository eventRecordRepository;
 
     public ResponseEntity<EventAcknowledgeMessage> process(EventMessage eventMessage) {
         EventRecord eventRecord = new EventRecord();
@@ -61,7 +59,7 @@ public class EventProcessor {
         CompletableFuture.runAsync(() -> {
             if(this.isEnableKafka()) {
                 kafkaHandler.handle(eventMessage);
-                LOGGER.info("Configuration bootstrap servers {}", bootstrapServers);
+                LOGGER.info("Kafka bootstrap servers {}", bootstrapServers);
             }
 
             if(this.isEnableAMQ()) {

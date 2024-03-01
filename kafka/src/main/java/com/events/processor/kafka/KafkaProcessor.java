@@ -3,6 +3,7 @@ package com.events.processor.kafka;
 import com.events.processor.event.dto.EventMessage;
 import com.events.processor.kafka.processor.ProducerProcessor;
 import com.google.gson.Gson;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@RequiredArgsConstructor
 public class KafkaProcessor implements ProducerProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProcessor.class.getName());
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Value(value="${events.kafka.topic-name}")
     private String kafkaTopicName;
