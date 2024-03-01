@@ -17,11 +17,10 @@ public class KafkaListenerProcessor {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(KafkaListenerProcessor.class);
 
-    @KafkaListener(topics = {"events"}, groupId = "events-processor-consumer-grp", autoStartup = "${listen.auto.start:false}")
-    public void process(ConsumerRecord<UUID, EventMessage> consumerRecord, Acknowledgment acknowledgment) {
+    @KafkaListener(topics = {"events"}, groupId = "events-processor-consumer-grp", autoStartup = "false")
+    public void process(ConsumerRecord<UUID, EventMessage> consumerRecord) {
         LOGGER.info("EVENT: ID {}, VALUE {}, OFFSET {}, PARTITION {}", consumerRecord.key(), consumerRecord.value(), consumerRecord.offset(), consumerRecord.partition() );
         LOGGER.info("Processing completed");
-        acknowledgment.acknowledge();
     }
 
 }

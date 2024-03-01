@@ -15,10 +15,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -27,13 +24,12 @@ public class PollProcessor implements ConsumerProcessor , ApplicationRunner{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerProcessor.class);
 
-    @Value("${events.kafka.bootstrapServers")
+    @Value("${events.kafka.bootstrapServers}")
     private String bootstrapServers;
 
     @Override
     public void process() {
         Map<String, Object> consumerProps = new HashMap<>();
-
         consumerProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
         consumerProps.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
         consumerProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -45,7 +41,7 @@ public class PollProcessor implements ConsumerProcessor , ApplicationRunner{
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(consumerProps);
 
         AtomicBoolean closed = new AtomicBoolean(false);
-        kafkaConsumer.subscribe(Arrays.asList("events"));
+        kafkaConsumer.subscribe(List.of("events"));
 
         while(!closed.get()) {
             ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
