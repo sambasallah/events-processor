@@ -17,7 +17,6 @@
 
 	<modules>
 		<module>core</module>
-		<module>events-producer</module>
 		<module>events-consumer</module>
         <module>commons</module>
         <module>kafka</module>

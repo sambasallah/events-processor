@@ -22,7 +22,6 @@ public class KafkaConsumerConfig {
     @Value("${events.kafka.bootstrapServers")
     private String bootstrapServers;
 
-    @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> consumerProps = new HashMap<>();
         consumerProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
