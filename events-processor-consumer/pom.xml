@@ -9,31 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>core</artifactId>
+    <artifactId>events-processor-consumer</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.events-processor</groupId>
-            <artifactId>commons</artifactId>
+            <artifactId>events-processor-commons</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.events-processor</groupId>
-            <artifactId>kafka</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.events-processor</groupId>
-            <artifactId>events-consumer</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
